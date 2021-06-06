@@ -1,0 +1,12 @@
+{% extends "restaurant/base.html" %}
+{% block content %}
+<h1> your menu </h1>
+{% for category, items in menu.items %}
+    <h2> {{ category }}</h2>
+    {% for item in items %}
+        <h3>{{ item.name }}</h3>
+        <p> {{ item.price }}</p>
+        <p>{{ item.description }}</p>
+    {% endfor %}
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,8 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .active > .nav-link {
+    color: rgb(219, 148, 35);
+}

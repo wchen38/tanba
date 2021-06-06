@@ -2,17 +2,24 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
+from django.template import loader
 
 from .models import Menu
 
 def index(request):
-    return HttpResponse("Hello World! This is your restaurant home page")
+    return render(request, 'restaurant/index.html')
 
 def menu_detail(request):
     categories = Menu.objects.all()
-    output = ""
+    menu = {}
     for category in categories:
-        import pdb; pdb.set_trace()
         items = category.menuitem_set.all()
-        output += ', '.join([item.name for item in items])
-    return HttpResponse("you are looking at the menu: {}".format(output))
+        menu[category.name] = items
+
+    context = {"menu": menu, "title": "Menu"}
+    return render(request, 'restaurant/menu.html', context)
+
+
+def checkout_detail(request):
+    context = {"title": "Checkout"}
+    return render(request, "restaurant/checkout.html", context)
