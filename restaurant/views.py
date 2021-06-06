@@ -9,7 +9,7 @@ from .models import Menu
 def index(request):
     return render(request, 'restaurant/index.html')
 
-def menu_detail(request):
+def menu_list(request):
     categories = Menu.objects.all()
     menu = {}
     for category in categories:
