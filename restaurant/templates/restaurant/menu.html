@@ -1,12 +1,21 @@
 {% extends "restaurant/base.html" %}
 {% block content %}
-<h1> your menu </h1>
+<div class="hero-image">
+    <div class="hero-text">
+        <h1 class="abril-font-reg-400"> Our Menu </h1>
+    </div>
+</div>
 {% for category, items in menu.items %}
-    <h2> {{ category }}</h2>
+    <h2 class=abril-font-reg-400> {{ category }}</h2>
     {% for item in items %}
+        <img src="{{item.picture.url}}" alt="">
         <h3>{{ item.name }}</h3>
         <p> {{ item.price }}</p>
         <p>{{ item.description }}</p>
+        <div>
+            <button type="button" class="btn btn-primary">Add to Cart</button>
+
+        </div>
     {% endfor %}
 {% endfor %}
 {% endblock content %}
