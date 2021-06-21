@@ -55,8 +55,37 @@
             let name = context.getAttribute("data-name");
             let price = context.getAttribute("data-price");
             let desc = context.getAttribute("data-desc");
-            console.log(name + " " + price + " " + desc);
-            localStorage.setItem("cart", Date.now()); 
+            
+            let localCart = localStorage.getItem("cart");
+            let cart;
+            if(localCart === null) {
+                cart = {
+                    [name]: {
+                        price: price,
+                        desc: desc,
+                        quantity: 1,
+                    }
+                }
+                localStorage.setItem("cart", JSON.stringify(cart));
+                return;
+            }
+            try {
+                cart = JSON.parse(localCart);
+                console.log(cart)
+                if(cart.hasOwnProperty(name)) {  
+                    cart[name].quantity += 1;
+                } else {
+                    cart[name] = {
+                        price: price,
+                        desc: desc,
+                        quantity: 1,
+                    }
+                }
+                localStorage.setItem("cart", JSON.stringify(cart));
+            } catch (e) {
+                console.log("Encountered error while parsing the object from local storage: " + e);
+            }
+            
         }
     });
 
