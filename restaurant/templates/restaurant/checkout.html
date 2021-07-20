@@ -1,6 +1,32 @@
 {% extends "restaurant/base.html" %}
 {% block content %}
     <div class="container">
-        <h1>This is your checkout page</h1>
+        <h1 class="abril-font-reg-400">Cart</h1>
+    <div>
+        <table class="table" id="checkout_table">
+
+        </table>
     </div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        let checkout_table = '<tr><th scope="col">Product</th> \
+                                <th scope="col">Price</th> \
+                                <th scope="col">Quantity</th> \
+                                <th scope="col">Subtotal</th></tr>';
+        let cart = JSON.parse(localStorage.getItem("cart"));
+
+        for(const item in cart) {
+            console.log(cart[item]);
+            const price = parseFloat(cart[item]["price"]);
+            const quantity = parseInt(cart[item]["quantity"]);
+            const subtotal = price * quantity;
+            checkout_table += "<tr> \
+                <td>"+ item + "</td><td>" + price + "</td><td>" + quantity + "</td><td>" + subtotal + "</td></tr>"
+        }
+        $("#checkout_table").html(checkout_table);
+    });
+    console.log("hello");
+</script>
 {% endblock content %}
